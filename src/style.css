@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+@theme {
+  --color-primary: #15222a;
+  --color-secondary: #09b2e0;
+  --color-green_text: #045349;
+  --color-primary-text: #172861;
+  --color-link-text: #6577c2;
+  --color-green: #008000;
+  --color-purple: #7c5dfa;
+  --color-orange: #ff8f00;
+  --font-primary: "Rubik", serif;
+}
+
+@layer {
+  .section_container {
+    @apply max-w-[1440px] container mx-auto;
+  }
+
+  .container_padding {
+    @apply mx-auto px-4 py-28;
+  }
+
+  .image_bg {
+    background-image:
+      linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 100)),
+      url(./images/image3.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .image_bg_2 {
+    background-image:
+      linear-gradient(to bottom, #09b2e020, #09b2e090), url(./images/image2.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  /* .sidebar_bg {
+      background-image: url(./images/sidebar_bg4.jpg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      height: 100vh;  
+      width: 300px;
+    } */
+
+  .router-link-exact-active {
+    background-color: #f6f6f6;
+    color: #000;
+
+    .text, .icon {
+      color: black;
+    }
+  }
+
+  .flex {
+    display: flex;
+  }
+
+  .flex_column {
+    flex-direction: column;
+  }
+
+  .box {
+    width: 100%;
+    padding: 10px 20px;
+    margin: 0 auto;
+  }
+
+  .btn_style {
+    cursor: pointer;
+    padding: 16px 24px;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    font-size: 12px;
+    margin-right: 8px;
+    color: #fff;
+  }
+
+  .dark_purple {
+    background-color: #252945;
+  }
+  .red {
+    background-color: #ec5757;
+  }
+  .purple {
+    background-color: #7c5dfa;
+  }
+  .green {
+    background-color: #33d69f;
+  }
+  .orange {
+    background-color: #ff8f00;
+  }
+
+  .bg_color {
+    background-color: #141625;
+  }
+
+  .status_button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 12px;
+    margin-right: 30px;
+    padding: 8px 30px;
+    border-radius: 10px;
+    width: 150px;
+
+    &::before {
+      content: "";
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+    }
+  }
+
+  .paid {
+    color: #33d69f;
+    background-color: rgba(51, 214, 160, 0.4);
+    &::before {
+      background-color: #33d69f;
+    }
+  }
+
+  .pending {
+    color: #ff8f00;
+    background-color: rgba(255, 145, 0, 0.4);
+    &::before {
+      background-color: #ff8f00;
+    }
+  }
+
+  .draft {
+    color: #000;
+    background-color: rgba(223, 227, 250, 0.7);
+    &::before {
+      background-color: #000;
+    }
+  }
+
+  .scheduled {
+    color: #000;
+    background-color: #73c4ef70;
+    &::before {
+      background-color: #000;
+    }
+  }
+}
