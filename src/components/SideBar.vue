@@ -143,7 +143,7 @@
                 />
               </router-link>
             </li>
-            <li>
+            <li v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Doctor' || $store.state.userrole == 'Staffs'">
               <router-link
                 :to="{ name: 'AppointmentsPage' }"
                 class="flex items-center gap-2 p-3 rounded-lg hover:bg-[#f6f6f6] hover:text-red-500 transition-all duration-300"
@@ -156,7 +156,7 @@
                 />
               </router-link>
             </li>
-            <li>
+            <li v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Doctor' || $store.state.userrole == 'Staffs'">
               <router-link
                 :to="{ name: 'PatientsPage' }"
                 class="flex items-center gap-2 p-3 rounded-lg hover:bg-[#f6f6f6] hover:text-red-500 transition-all duration-300"
@@ -169,7 +169,7 @@
                 />
               </router-link>
             </li>
-            <li>
+            <li v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Doctor' || $store.state.userrole == 'Staffs'">
               <router-link
                 :to="{ name: 'InvoicesPage' }"
                 class="flex items-center gap-2 p-3 rounded-lg hover:bg-[#f6f6f6] hover:text-red-500 transition-all duration-300"
@@ -183,7 +183,7 @@
               </router-link>
             </li>
 
-            <li>
+            <li v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Staffs'">
               <router-link
                 :to="{ name: 'ServicesPage' }"
                 class="flex items-center gap-2 p-3 rounded-lg hover:bg-[#f6f6f6] hover:text-red-500 transition-all duration-300"
@@ -196,7 +196,7 @@
                 />
               </router-link>
             </li>
-            <li>
+            <li v-if="$store.state.userrole == 'Administrator'">
               <router-link
                 :to="{ name: 'UsersPage' }"
                 class="flex items-center gap-2 p-3 rounded-lg hover:bg-[#f6f6f6] hover:text-red-500 transition-all duration-300"
