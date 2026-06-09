@@ -1,7 +1,11 @@
 import { createStore } from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 const store = createStore({
+  plugins: [createPersistedState()],
+  
   state: {
+    modalSidebar: false,
     modalInvoice: false,
     modalPatient: false,
     modalLogout: false,
@@ -18,6 +22,9 @@ const store = createStore({
     userrole: "",
   },
   mutations: {
+    TOGGLE_SIDEBAR(state) {
+      state.modalSidebar = !state.modalSidebar;
+    },
     TOGGLE_INVOICE(state) {
       if (state.modalPatient == true) {
         state.modalPatient = false;

@@ -304,6 +304,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
     await addDoc(collection(db, "invoices"), {
       ...invoice,
       createdBy: store.state.username,
+      createdAt: new Date().toLocaleDateString(),
     });
     emit("close");
     ElMessage.success("Invoice created successfully");

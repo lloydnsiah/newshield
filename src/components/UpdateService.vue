@@ -58,7 +58,8 @@ const onSubmit = async () => {
         name: form.name,
         price: form.price,
         updatedBy: store.state.username,
-        updatedAt: serverTimestamp()})
+        updatedAt: new Date().toLocaleDateString(),
+      })
         
     emit('close')
     ElMessage.success("Service updated successfully");

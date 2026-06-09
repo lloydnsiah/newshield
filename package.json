@@ -15,8 +15,9 @@
     "swiper": "^12.1.2",
     "tailwindcss": "^4.2.0",
     "vue": "^3.5.25",
+    "vue-router": "^4.6.4",
     "vuex": "^4.0.2",
-    "vue-router": "^4.6.4"
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@iconify/vue": "^4.3.0",

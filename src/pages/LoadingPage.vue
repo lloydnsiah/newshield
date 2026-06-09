@@ -118,9 +118,6 @@ onMounted(() => {
 });
 
 const loadUser = (email) => {
-  console.log("load user starting");
-  console.log("email:", email);
-
   // cleanup old listener
   if (unsubscribeUser) unsubscribeUser();
 
@@ -140,7 +137,6 @@ const loadUser = (email) => {
           ...userDoc.data(),
         };
         store.commit("SET_USERDATA", currentUserData.value);
-        console.log("UserData",currentUserData.value);
         currentUserStatus.value = currentUserData.value.status;
         setTimeout(() => {
           move()
@@ -163,8 +159,6 @@ const move = () => {
   }else{
    logout();
   }
-  console.log("move called")
- 
 };
 
 const logout = () => {

@@ -41,7 +41,7 @@ const onSubmit = async () => {
   try{
     await addDoc(collection(db, 'services'), {
       ...form,
-      createdAt: serverTimestamp(),
+      createdAt: new Date().toLocaleDateString(),
       createdBy: store.state.username,
     })
     emit('close')

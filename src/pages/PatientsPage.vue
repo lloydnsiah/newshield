@@ -73,7 +73,7 @@ const updateUser = (user) => {
           <el-table-column prop="gender" label="Gender" />
           <el-table-column prop="consent" label="Consent" />
           <el-table-column prop="lastVisitAt" label="Last Visit At" />
-          <el-table-column fixed="right" label="Actions" class="actions">
+          <el-table-column fixed="right" label="Actions" class="actions" v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Staffs'">
             <template #default="scope">
               <el-button
                 link

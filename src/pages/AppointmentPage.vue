@@ -79,9 +79,10 @@ const viewUser = (item) => {
           </el-table-column>
           <el-table-column prop="visitDate" label="Visit Date" />
           <el-table-column prop="status" label="Status" />
-          <el-table-column fixed="right" label="Actions" class="actions">
+          <el-table-column fixed="right" label="Actions" class="actions" v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Doctor' || $store.state.userrole == 'Staffs'">
             <template #default="scope">
               <el-button
+                v-if="scope.row.status !== 'Completed' && scope.row.status !== 'Cancelled'"
                 link
                 type="primary"
                 size="small"

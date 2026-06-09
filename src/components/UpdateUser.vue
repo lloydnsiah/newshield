@@ -89,7 +89,7 @@ const onSubmit = async () => {
       email: form.email,
       role: form.role,
       status: form.status,
-      updatedAt: serverTimestamp(),
+      updatedAt: new Date().toLocaleDateString(),
       updatedBy: store.state.username,
     });
 

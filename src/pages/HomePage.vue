@@ -51,7 +51,7 @@ const loadPatients = async () => {
   <body class="w-screen h-screen flex flex-col gap-8 bg-[#F1F5F9]">
     <!-- navbar -->
     <div class="w-screen flex items-center justify-between px-12 py-2 bg-white">
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 cursor-pointer" @click="store.commit('TOGGLE_SIDEBAR')">
         <Icon
           icon="material-symbols:menu-rounded"
           width="24"
@@ -61,7 +61,7 @@ const loadPatients = async () => {
         <img src="../images/shield_logo.png" alt="" class="size-10" />
       </div>
       <div class="flex space-x-5 items-center">
-        <button
+        <!-- <button
           class="w-7 h-7 rounded-full bg-green flex items-center justify-center transition-all hover:translate-y-1 duration-300" 
         >
           <Icon
@@ -96,7 +96,7 @@ const loadPatients = async () => {
           width="32"
           height="32"
           style="color: #8a8a8a"
-        />
+        /> -->
         <Icon
           icon="material-symbols:supervised-user-circle"
           width="32"

@@ -7,7 +7,7 @@ export const heroSlides = [
   },
   {
     id: 2,
-    bgImage: new URL('../simages/slide02.jpg', import.meta.url).href,
+    bgImage: new URL('../images/slide02.jpg', import.meta.url).href,
     title: 'Northern Lights', 
     subtitle: 'Nature paints the night with emerald '
   },

@@ -129,19 +129,28 @@
         style="width: 98%; margin-bottom: 20px"
       >
         <el-table-column prop="patientName" label="Patient Name" />
-        <el-table-column prop="paitentId" label="Paitent Id" />
+        <el-table-column prop="paitentId" label="Patient Id" />
         <el-table-column prop="visitDate" label="Visit Date" />
         <el-table-column prop="status" label="Status" />
-        <el-table-column fixed="right" label="Actions" class="actions">
+        <el-table-column fixed="right" label="Actions" class="actions" v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Doctor' || $store.state.userrole == 'Staffs'">
           <template #default="scope">
+            <el-button
+              link
+              type="success"
+              size="small"
+              @click="viewApp(scope.row.id)"
+            >
+              View
+            </el-button>
             <el-button
               link
               type="primary"
               size="small"
-              @click="updateUser(scope.row)"
+              @click="updateApp(scope.row)"
             >
               Edit
             </el-button>
+            
           </template>
         </el-table-column>
 
@@ -166,7 +175,6 @@
     </div>
     <div class="bg-white p-4 h-[39%] flex flex-col overflow-auto gap-2 ">
       <span>Invoices</span>
-
       <el-table v-loading="loading" :data="tableDataInvoices" style="width: 98%; margin-bottom: 20px">
           <el-table-column prop="patient.name" label="Name" />
           <el-table-column prop="patient.phone" label="Phonenumber" />
@@ -193,101 +201,33 @@
               {{ scope.row.paymentStatus }} 
             </template>
           </el-table-column>
-          <el-table-column fixed="right" label="Actions" class="actions">
+          <el-table-column fixed="right" label="Actions" class="actions" v-if="$store.state.userrole == 'Administrator' || $store.state.userrole == 'Doctor' || $store.state.userrole == 'Staffs'">
             <template #default="scope">
-              <el-button link type="primary" size="small" @click="updateService(scope.row)"> View </el-button>
+              <el-button link type="primary" size="small" @click="viewInvoice(scope.row)"> View </el-button>
             </template>
           </el-table-column>
         </el-table>
     </div>
   </body>
   <UpdateAppointment v-if="modalupdateApp" @close="modalupdateApp = false" :appointment="selectedItem" />
+  <InvoiceDetailsView v-if="modalview" @close="modalview = false" :invoice="selectedItem"/>
+  <ViewAppointment v-if="modalviewApp" @close="modalviewApp = false" :selectedId="selectedItem"/>
 </template>
-
-<!-- <script setup>
-import UpdateAppointment from "../components/UpdateAppointment.vue";
-import { Icon } from "@iconify/vue";
-import { ref, onMounted, onUnmounted } from "vue";
-import { db } from "../firebase";
-import {
-  collection,
-  getDocs,
-  onSnapshot,
-  doc,
-  deleteDoc,
-} from "firebase/firestore";
-
-const loadingP = ref(false);
-const loadingI = ref(false);
-const modalupdateApp = ref(false);
-const tableDataAppointments = ref([]);
-const tableDataInvoices = ref([]);
-const selectedItem = ref(null);
-let unsubscribeAppointments = null;
-let unsubscribeInvoices = null;
-
-const updateUser = (item) => {
-  selectedItem.value = item;
-  modalupdateApp.value = true;
-};
-
-const loadAppointments = () => { // Removed 'async' as onSnapshot is not awaited
-  loadingP.value = true;
-  const q = collection(db, "appointments");
-
-  unsubscribeAppointments = onSnapshot(q, (snapshot) => {
-    tableDataAppointments.value = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    loadingP.value = false;
-  }, (err) => {
-    console.error("Appointment Listener Error:", err);
-  });
-};
-
-const loadInvoices = () => {
-  loadingI.value = true;
-  const q = collection(db, "invoices");
-
-  unsubscribeInvoices = onSnapshot(q, (snapshot) => {
-    tableDataInvoices.value = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    loadingI.value = false;
-  }, (err) => {
-    console.error("Invoice Listener Error:", err);
-  });
-}
-
-onMounted(() => {
-  onUnmounted(() => {
-  // Fix: Call the specific unsubscribe functions
-  if (unsubscribeAppointments) unsubscribeAppointments();
-  if (unsubscribeInvoices) unsubscribeInvoices();
-  loadAppointments()
-  loadInvoices
-});
-});
-
-onUnmounted(() => {
-  if (unsubscribe) unsubscribe()
-})
-
-</script> -->
-
 
 <script setup>
 import UpdateAppointment from "../components/UpdateAppointment.vue";
+import InvoiceDetailsView from "../components/InvoiceDetailsView.vue";
 import { Icon } from "@iconify/vue";
 import { ref, onMounted, onUnmounted } from "vue";
 import { db } from "../firebase";
 import { collection, onSnapshot } from "firebase/firestore";
+import ViewAppointment from "../components/ViewAppointment.vue";
 
 const loadingP = ref(false);
 const loadingI = ref(false);
 const modalupdateApp = ref(false);
+const modalview = ref(false);
+const modalviewApp = ref(false);
 const tableDataAppointments = ref([]);
 const tableDataInvoices = ref([]);
 const selectedItem = ref(null);
@@ -295,9 +235,19 @@ const selectedItem = ref(null);
 let unsubscribeAppointments = null;
 let unsubscribeInvoices = null;
 
-const updateUser = (item) => {
+const updateApp = (item) => {
   selectedItem.value = item;
   modalupdateApp.value = true;
+};
+
+const viewApp = (item) => {
+  selectedItem.value = item;
+  modalviewApp.value = true;
+};
+
+const viewInvoice = (user) => {
+  selectedItem.value = user;
+  modalview.value = true;
 };
 
 const loadAppointments = () => {
@@ -311,6 +261,7 @@ const loadAppointments = () => {
         id: doc.id,
         ...doc.data(),
       }));
+      console.log("Appointments:", tableDataAppointments.value);
       loadingP.value = false;
     },
     (err) => console.error("Appointment Listener Error:", err)

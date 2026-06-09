@@ -103,7 +103,7 @@ const onSubmit = async () => {
     await addDoc(collection(db, "appointments"), {
       ...form,
       createdBy: store.state.username,
-      createdAt: serverTimestamp(),
+      createdAt: new Date().toLocaleDateString(),
     });
     emit("close");
     ElMessage.success("Visit created successfully");

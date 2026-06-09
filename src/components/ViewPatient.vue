@@ -3,7 +3,7 @@
     <div class="form" v-loading="loading">
       <el-descriptions
         class="margin-top"
-        title="With border"
+        title="Patient Details"
         :column="3"
         :size="size"
         border
@@ -38,7 +38,7 @@
               Gender
             </div>
           </template>
-          <span>{{ currentPatient?.gender || 'N/A' }} yrs</span>
+          <span>{{ currentPatient?.gender || 'N/A' }}</span>
         </el-descriptions-item>
         <el-descriptions-item :span="3">
           <template #label>
